@@ -1,8 +1,11 @@
 # ROADMAP — Laboratorio 2: backend multinodo y demostración
 
+> **Nota de navegación (19/11/2026):** este documento conserva el checkpoint histórico del Laboratorio 2 del 25/10/2026. La presentación del 28/10 ya ocurrió; las menciones a actividades «pendientes» describen el estado de aquel checkpoint, no una lista vigente de tareas. El repositorio se denomina ahora `FAJIFBEFJHA/lab-software-telecomunicaciones`. Para encontrar código, pruebas y evidencias, consulte [MAPA_DEL_PROYECTO.md](MAPA_DEL_PROYECTO.md). Las rutas anteriores de `C:\Proyecto\...` reflejan el entorno histórico de la laptop y no se actualizan retrospectivamente.
+
+
 **Checkpoint vigente: 25/10/2026.** P13 integrado con tres ESP32; P14-A documenta recuperación Wi-Fi funcional con contraste SQL limitado, y P14-B/C documentan recuperación funcional con dictamen global **INCOMPLETO**. P15 y la verificación retrospectiva T05 acreditan 336 claves de la ventana física; la prueba LOAD caracteriza HTTP en loopback. El informe P16 está versionado. La entrega y demostración presencial del **28/10/2026** aún no han ocurrido. La revisión presencial del 21/10 fue realizada sin observaciones, según confirmó el estudiante.
 
-**Producto actual:** https://github.com/FAJIFBEFJHA/lab2-software-telecomunicaciones
+**Repositorio (nombre actual desde noviembre de 2026):** https://github.com/FAJIFBEFJHA/lab-software-telecomunicaciones
 
 **Origen histórico:** `jmamanilari-cyber/lab1-iot-node`, subdirectorio `lab2/`.
 
