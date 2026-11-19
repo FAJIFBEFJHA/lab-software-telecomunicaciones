@@ -15,6 +15,6 @@ passwords.*
 *.pem
 mosquitto.conf
 *.log
-/logs/latency/
-/logs/evidence/
-/.runtime/start-lab2/
+# Resultados experimentales privados y estado local de servicios
+/logs/
+/.runtime/
