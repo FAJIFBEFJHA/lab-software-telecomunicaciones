@@ -1,8 +1,8 @@
-# Laboratorio 2 — Software de Telecomunicaciones
+# Software de Telecomunicaciones — Laboratorio 2
 
 Este repositorio independiente contiene en su raíz el antiguo directorio `lab2/` de `lab1-iot-node`, extraído con `git subtree split`. Los comandos siguientes se ejecutan desde esta raíz. El repositorio de Laboratorio 1 es independiente.
 
-Estado documentado al 24 de octubre de 2026: C1/C2 y D1 están implementados; D2 MQTT/TLS por LAN está integrado con `esp32-03`; los tres ESP32 transmitieron simultáneamente en la campaña P15. [P15_RESULTADOS.md](docs/P15_RESULTADOS.md) registra 336 filas y dos campañas de duración interna de PHP. P14 se ejecutó y observó, con los límites de evidencia indicados en [P14_RESULTADOS.md](docs/P14_RESULTADOS.md). La verificación T05–T08 y una prueba de carga controlada siguen pendientes. Esta migración solo se comprobó de forma estática; no se repitieron ensayos ni se verificó el estado de los servicios.
+**Estado histórico documentado (25 de octubre de 2026):** C1/C2, D1 y D2 MQTT/TLS integrados; tres ESP32 operaron simultáneamente durante P15. [P15_RESULTADOS.md](docs/P15_RESULTADOS.md) describe 336 registros y campañas separadas de latencia interna; la verificación retrospectiva T05 contrastó esas 336 claves. La campaña de carga HTTP local (LOAD) documentó 400 solicitudes medidas, sin acreditar la capacidad máxima ni el rendimiento extremo a extremo. [P14_RESULTADOS.md](docs/P14_RESULTADOS.md) conserva las limitaciones de P14-A y el estado **INCOMPLETO** de P14-B/C. T06–T08 fueron antecedentes de planificación, no requisitos oficiales. Estos hechos históricos no certifican que los servicios estén activos hoy ni reemplazan las fuentes originales de la laptop.
 
 ## E1: ESP32 #2 por HTTPS
 
@@ -31,7 +31,9 @@ README.md
 .gitignore
 ```
 
-La aplicación y las pruebas resuelven sus archivos desde esta estructura; los tópicos MQTT y la base de datos conservan el nombre `lab2`.
+La aplicación y las pruebas resuelven sus archivos desde esta estructura; los tópicos MQTT y la base de datos conservan el nombre `lab2`. El nombre del repositorio pasó a `lab-software-telecomunicaciones` para permitir trabajo futuro sin renombrar retroactivamente las identidades internas del Laboratorio 2.
+
+**Orientación:** [MAPA_DEL_PROYECTO.md](docs/MAPA_DEL_PROYECTO.md) relaciona código, herramientas de pruebas, ubicaciones previstas de evidencias y diferencias entre la PC y la laptop. Las carpetas `logs/` y `.runtime/` se generan localmente y pueden no existir en un clon de GitHub.
 
 ## Inicio básico
 
