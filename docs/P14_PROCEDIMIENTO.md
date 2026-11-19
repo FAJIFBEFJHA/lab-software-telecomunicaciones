@@ -1,5 +1,8 @@
 # P14: nueva evidencia fisica de interrupcion y recuperacion
 
+> **Lectura de rutas (19/11/2026):** este procedimiento P14 fue redactado para la carpeta histórica de la laptop `C:\Proyecto\lab2-software-telecomunicaciones`. El repositorio de GitHub se llama ahora `lab-software-telecomunicaciones`, y la PC de escritorio utiliza `D:\Proyectos\lab-software-telecomunicaciones`. Los comandos con rutas absolutas en este documento son ejemplos históricos; antes de reutilizarlos debe reemplazarse la raíz por la carpeta real del equipo y validarse el estado de los servicios. No se vuelven a ejecutar pruebas P14 únicamente por el cambio de nombre. Véase [MAPA_DEL_PROYECTO.md](MAPA_DEL_PROYECTO.md).
+
+
 Este procedimiento prepara **nuevas observaciones del operador**. La preparacion
 de las herramientas y sus pruebas unitarias no ejecutan ni aprueban P14.
 Orden: **A (Wi-Fi manual), B (indisponibilidad HTTPS por bloqueo de red), C (broker D2)**. Una carpeta independiente
