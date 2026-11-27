@@ -4,6 +4,7 @@ using System.Text;
 using Edge.Api;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Edge.Tests;
 
@@ -11,22 +12,27 @@ internal sealed class EdgeTestHost : IAsyncDisposable
 {
     private readonly string directory = Path.Combine(AppContext.BaseDirectory, "isolated-db", Guid.NewGuid().ToString("N"));
     private readonly int capacity;
+    private readonly Action<IServiceCollection>? configureServices;
+    private string[] configuration;
     private WebApplication? app;
 
-    private EdgeTestHost(int capacity)
+    private EdgeTestHost(int capacity, string[] configuration, Action<IServiceCollection>? configureServices)
     {
         this.capacity = capacity;
+        this.configuration = configuration;
+        this.configureServices = configureServices;
     }
 
     public const string Sample = """{"node_id":"virtual-01","seq":1,"timestamp":null,"value":1,"rssi":null}""";
     public static string NodeToken { get; } = new('a', 64);
     public static string OtherToken { get; } = new('b', 64);
     public HttpClient Client { get; private set; } = null!;
-    private string DatabasePath => Path.Combine(directory, "test.sqlite");
+    public string DatabasePath => Path.Combine(directory, "test.sqlite");
 
-    public static async Task<EdgeTestHost> StartAsync(int capacity = 100)
+    public static async Task<EdgeTestHost> StartAsync(int capacity = 100, string[]? configuration = null,
+        Action<IServiceCollection>? configureServices = null)
     {
-        var host = new EdgeTestHost(capacity);
+        var host = new EdgeTestHost(capacity, configuration ?? [], configureServices);
         Directory.CreateDirectory(host.directory);
         try
         {
@@ -40,9 +46,10 @@ internal sealed class EdgeTestHost : IAsyncDisposable
         }
     }
 
-    public async Task RestartAsync()
+    public async Task RestartAsync(string[]? newConfiguration = null)
     {
         await StopApplicationAsync();
+        configuration = newConfiguration ?? configuration;
         await StartApplicationAsync();
     }
 
@@ -89,8 +96,8 @@ internal sealed class EdgeTestHost : IAsyncDisposable
             $"--contentRoot={directory}", "--urls=http://127.0.0.1:0",
             $"--Edge:DatabasePath={DatabasePath}", $"--Edge:Capacity={capacity}", "--Edge:WriteTimeoutSeconds=1",
             $"--Edge:Nodes:virtual-01={NodeToken}", $"--Edge:Nodes:esp32-02={OtherToken}",
-            "--Logging:LogLevel:Default=Warning"
-        ]);
+            "--Logging:LogLevel:Default=Warning", .. configuration
+        ], configureServices);
         await app.StartAsync();
         Client = new HttpClient { BaseAddress = new Uri(app.Urls.Single()), DefaultRequestVersion = HttpVersion.Version11 };
     }
@@ -100,6 +107,7 @@ internal sealed class EdgeTestHost : IAsyncDisposable
         Client?.Dispose();
         if (app is not null)
         {
+            await app.StopAsync();
             await app.DisposeAsync();
             app = null;
         }

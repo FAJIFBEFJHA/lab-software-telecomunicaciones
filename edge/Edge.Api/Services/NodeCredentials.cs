@@ -7,6 +7,7 @@ namespace Edge.Api.Services;
 public sealed class NodeCredentials
 {
     private readonly Dictionary<string, string> nodesByDigest = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, string> tokensByNode = new(StringComparer.Ordinal);
 
     public NodeCredentials(IConfigurationSection nodes)
     {
@@ -19,6 +20,8 @@ public sealed class NodeCredentials
                 throw new InvalidOperationException(
                     "Edge:Nodes debe contener identidades validas con tokens hexadecimales unicos de 64 caracteres.");
             }
+
+            tokensByNode.Add(node.Key, token!);
         }
 
         if (nodesByDigest.Count == 0)
@@ -38,6 +41,8 @@ public sealed class NodeCredentials
 
         return nodesByDigest.GetValueOrDefault(Digest(header.Parameter!));
     }
+
+    internal string? GetDeliveryToken(string nodeId) => tokensByNode.GetValueOrDefault(nodeId);
 
     private static bool IsToken(string? value) =>
         value is { Length: 64 } && value.All(character =>
